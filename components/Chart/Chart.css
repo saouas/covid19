@@ -1,0 +1,9 @@
+#container-chart{
+    margin-top: 50px;
+    width: 80%;
+    margin-left: 10%
+}
+
+#linechart{
+    min-height: 100px;
+}
