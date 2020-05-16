@@ -10,7 +10,7 @@ const Chart = ({ country, data:{ confirmed, recovered, deaths} }) => {
         (async () => {
             setDailyData(await fetchDailyData());
         })();
-    },[]);
+    },[country]);
 
     const lineChart = (
         dailyData.length ?
@@ -34,6 +34,7 @@ const Chart = ({ country, data:{ confirmed, recovered, deaths} }) => {
             }}
         />) : null
     );
+
 
     const barChart = (
         confirmed ?
@@ -59,7 +60,7 @@ const Chart = ({ country, data:{ confirmed, recovered, deaths} }) => {
 return (
 <div>
     <Grid id="container-chart">
-        {country ? barChart : lineChart}
+        {country && country != "Global" ? barChart : lineChart}
     </Grid>
 </div>
 )};

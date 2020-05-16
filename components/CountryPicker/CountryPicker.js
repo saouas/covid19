@@ -5,11 +5,13 @@ import { fetchCountriesData } from './../../pages/api/index';
 const CountryPicker = ({ handleCountryChange }) => {
 
     const [countries, setCountries] = useState([]);
-    const [actualCountry, setActualCountry] = useState('France');
+    const [actualCountry, setActualCountry] = useState('Global');
     
     useEffect(() => {
         (async () => {
-            setCountries(await fetchCountriesData());
+            let tmp_countries = await fetchCountriesData();
+            tmp_countries.unshift("Global");
+            setCountries(tmp_countries);
         })();
     }, [setCountries]);
 

@@ -5,11 +5,12 @@ import { fetchData } from './api';
 
 export default function Home() {
   const [dataCards, setDataCards] = useState({});
-  const [country, setCountry] = useState('France');
+  const [country, setCountry] = useState('Global');
 
-  const handleCountryChange = async (country) => {
-    const data = await fetchData(country);
+  const handleCountryChange = async (newCountry) => {
+    const data = await fetchData(newCountry);
     setDataCards(data)
+    setCountry(newCountry)
   }
 
   useEffect(() =>{

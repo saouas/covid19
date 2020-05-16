@@ -6,7 +6,7 @@ const BACKEND_ENDPOINT = `https://covid19.mathdro.id/api`;
 const fetchData = async (country) => {
     let changeableUrl = BACKEND_ENDPOINT;
     
-    if(country){
+    if(country && country != "Global"){
         changeableUrl = `${BACKEND_ENDPOINT}/countries/${country}`;
     }
     try{
