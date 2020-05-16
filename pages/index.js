@@ -5,20 +5,28 @@ import { fetchData } from './api';
 
 export default function Home() {
   const [dataCards, setDataCards] = useState({});
+  const [country, setCountry] = useState('France');
+
+  const handleCountryChange = async (country) => {
+    const data = await fetchData(country);
+    setDataCards(data)
+  }
 
   useEffect(() =>{
     (async () => {
-      const data = await fetchData();
+      const data = await fetchData(country);
       setDataCards(data);
     })();
   },[])
 
 
   return (
-  <div> 
+  <div id="container-global"> 
+    <img src="/images/logo.png" id="logo"></img>
     <Cards data={dataCards}/>
-    <CountryPicker />
-    <Chart />
+    <CountryPicker handleCountryChange={handleCountryChange} />
+    <Chart data={dataCards} country={country}/>
+    <p id="footer">Made with ❤️ by <a href="https://salimaouas.dev">Salim Aouas</a></p>
   </div>
   )
 }

@@ -3,9 +3,14 @@ import { defaultCipherList } from 'constants';
 
 const BACKEND_ENDPOINT = `https://covid19.mathdro.id/api`;
 
-const fetchData = async () => {
+const fetchData = async (country) => {
+    let changeableUrl = BACKEND_ENDPOINT;
+    
+    if(country){
+        changeableUrl = `${BACKEND_ENDPOINT}/countries/${country}`;
+    }
     try{
-        const { data : {confirmed, recovered, deaths, lastUpdate} } = await axios.get(BACKEND_ENDPOINT);
+        const { data : {confirmed, recovered, deaths, lastUpdate} } = await axios.get(changeableUrl);
 
         const editedData = {
             confirmed,
@@ -38,4 +43,15 @@ const fetchDailyData = async () =>{
     }
 }
 
-export { fetchData, fetchDailyData };
+const fetchCountriesData = async () => {
+    try{
+        const { data:{ countries }} = await axios.get(`${BACKEND_ENDPOINT}/countries`);
+        
+        return countries.map((country) => country.name);
+    }
+    catch (err){
+        console.log(`error fetchCountriesData : ${err}`) 
+    }
+}
+
+export { fetchData, fetchDailyData, fetchCountriesData };
