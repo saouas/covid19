@@ -22,7 +22,10 @@ export default function Home() {
 
 
   return (
-  <div id="container-global"> 
+  <div id="container-global">
+    <Head>
+      <title>Covid19 report</title>
+    </Head> 
     <img src="/images/logo.png" id="logo"></img>
     <Cards data={dataCards}/>
     <CountryPicker handleCountryChange={handleCountryChange} />
